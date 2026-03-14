@@ -1,0 +1,13 @@
+Strategy: ma_crossover_v3
+Symbol: BTCUSDT
+Backtest Range: 2020-01-01 00:00:00 to 2026-02-28 00:00:00
+Total Return: 496.48%
+Annual Return: 33.60%
+Volatility: 41.84%
+Sharpe Ratio: 0.90
+Max Drawdown: -63.10%
+Win Rate: 31.25%
+Average Win: 24.72%
+Average Loss: -5.22%
+Profit/Loss Ratio: 4.73
+Total Trades: 64

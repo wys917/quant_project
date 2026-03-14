@@ -1,69 +1,113 @@
 # quant_project
 
-一个面向初学者的量化交易练手项目，路线是：**传统量化底盘 + 智能体研究助手**。
+一个面向初学者的量化研究练手项目，目标是逐步搭建一个“传统量化底盘 + 智能体研究助手”的系统原型。
+
+## 项目定位
+
+- 先把基础研究链路跑通，再逐步接入更智能的研究助手能力
+- 当前重点不是做复杂框架，而是把数据、回测、指标、报告整理成清晰可复用的输入输出链路
+- 项目适合学习 pandas、简单回测逻辑、结构化研究结果导出，以及后续的 Agent/LLM 接口准备
+
+## 当前实现
+
+- BTCUSDT 日线历史数据
+- 双均线策略
+- 当天收盘出信号、次日开盘成交的回测逻辑
+- 回测指标输出
+- 交易统计输出
+- 自动导出结构化结果
+- 自动生成 Markdown 策略报告
 
 ## 当前阶段
 
 - 单标的：BTCUSDT
-- 数据频率：日线（1d）
-- 策略：双均线策略（MA）
-- 系统：最小回测系统（含交易记录与基础绩效指标）
+- 数据频率：1d
+- 策略：双均线策略（MA5 / MA20）
+- 系统形态：最小可用回测系统 + 规则驱动研究报告
 
 ## 目录结构
 
 ```text
 quant_project/
-├── main.py
+├── data/
+│   ├── raw/
+│   └── processed/
+│       ├── BTCUSDT_1d_full.csv
+│       └── results/
+│           ├── metrics.json
+│           ├── trades.csv
+│           ├── round_trips.csv
+│           ├── equity_curve.csv
+│           └── summary.txt
 ├── engine/
+│   ├── __init__.py
 │   └── metrics.py
 ├── notebooks/
 │   ├── merge_monthly_data.py
 │   ├── check_data.py
 │   ├── ma_strategy.py
-│   ├── backtest_ma.py
-│   ├── backtest_ma_v2.py
-│   ├── backtest_ma_v3.py
-│   └── prepare_data.py
-├── data/
-│   ├── raw/
-│   │   └── monthly/         # 原始月度K线（默认不入库）
-│   └── processed/           # 合并后的数据与回测结果样例
-├── config/
-├── strategies/
-└── report/
+│   └── backtest_ma_v3.py
+├── agent/
+│   ├── __init__.py
+│   ├── agent_report.py
+│   └── prompt_templates.py
+├── report/
+│   └── strategy_report.md
+└── README.md
 ```
 
-## 数据准备
+## 如何准备数据
 
-1. 将 BTCUSDT 日线月度原始数据放入 `data/raw/monthly/`（例如 Binance 导出的月度 CSV）。
-2. 运行数据合并脚本生成全量日线文件。
-3. 使用数据检查脚本确认字段和时间范围。
+1. 下载 Binance 的 BTCUSDT 日线月度 CSV 数据到 `data/raw/monthly/`
+2. 运行 `python notebooks/merge_monthly_data.py`
+3. 生成标准研究数据文件 `data/processed/BTCUSDT_1d_full.csv`
+4. 如需检查数据，再运行 `python notebooks/check_data.py`
 
-> 说明：`data/raw/` 已在 `.gitignore` 中忽略，避免将大体量原始数据上传到 GitHub。
+说明：
 
-## 运行方式
+- `data/raw/` 主要放原始月度数据，通常不建议上传到远程仓库
+- 当前研究主数据文件是 `data/processed/BTCUSDT_1d_full.csv`
+
+## 运行顺序
 
 ```bash
 python notebooks/merge_monthly_data.py
 python notebooks/check_data.py
 python notebooks/ma_strategy.py
 python notebooks/backtest_ma_v3.py
+python agent/agent_report.py
 ```
 
-## 当前已实现功能
+## 回测结果输出
 
-- 原始月度数据合并为统一日线数据
-- 数据质量检查与可视化验证
-- 双均线信号生成
-- 回测执行（含交易记录、回合交易、基础绩效统计）
+运行 `python notebooks/backtest_ma_v3.py` 后，会自动生成：
+
+- `data/processed/results/metrics.json`
+- `data/processed/results/trades.csv`
+- `data/processed/results/round_trips.csv`
+- `data/processed/results/equity_curve.csv`
+- `data/processed/results/summary.txt`
+
+运行 `python agent/agent_report.py` 后，会自动生成：
+
+- `report/strategy_report.md`
+
+## 当前限制
+
+- 仅单标的
+- 仅单策略
+- 仅日线研究
+- 未接入真实 LLM / OpenAI API
+- 仍是研究系统，不是实盘系统
 
 ## 下一步计划
 
-- 增加参数网格与批量回测
-- 增加手续费/滑点与更真实的成交模型
-- 扩展到多标的与组合视角
-- 逐步接入“智能体研究助手”用于实验管理与结果解释
+- 接入 LLM 生成更自然的研究报告
+- 增加市场状态识别
+- 增加多策略对比
+- 增加参数实验系统
+- 增加风控模块
 
 ## 免责声明
 
-本项目仅用于学习与研究，不构成任何投资建议。
+本项目仅用于学习和研究，不构成任何投资建议。

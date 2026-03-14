@@ -1,0 +1,16 @@
+{
+  "strategy_name": "ma_crossover_v3",
+  "symbol": "BTCUSDT",
+  "start_date": "2020-01-01 00:00:00",
+  "end_date": "2026-02-28 00:00:00",
+  "total_return": 4.964768043830826,
+  "annual_return": 0.33603707750122624,
+  "volatility": 0.4183681852506267,
+  "sharpe": 0.9006114126781942,
+  "max_drawdown": -0.6309579571070423,
+  "win_rate": 0.3125,
+  "avg_win": 0.24721230397511756,
+  "avg_loss": -0.05221609991800582,
+  "profit_loss_ratio": 4.734407670494568,
+  "total_trades": 64
+}
