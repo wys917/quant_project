@@ -1,6 +1,32 @@
 import numpy as np
 import pandas as pd
+def calculate_trade_stats(trades_df):
+    if len(trades_df) == 0:
+        return {
+            "win_rate": 0,
+            "avg_win": 0,
+            "avg_loss": 0,
+            "profit_loss_ratio": 0
+        }
 
+    pnl = trades_df["pnl_pct"]
+
+    win_trades = pnl[pnl > 0]
+    loss_trades = pnl[pnl < 0]
+
+    win_rate = len(win_trades) / len(pnl)
+
+    avg_win = win_trades.mean() if len(win_trades) > 0 else 0
+    avg_loss = loss_trades.mean() if len(loss_trades) > 0 else 0
+
+    profit_loss_ratio = abs(avg_win / avg_loss) if avg_loss != 0 else float("inf")
+
+    return {
+        "win_rate": win_rate,
+        "avg_win": avg_win,
+        "avg_loss": avg_loss,
+        "profit_loss_ratio": profit_loss_ratio
+    }
 
 def calculate_metrics(df, equity_col="equity_curve"):
     """

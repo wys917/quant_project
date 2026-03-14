@@ -1,4 +1,8 @@
-from engine.metrics import calculate_metrics
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+from engine.metrics import calculate_metrics, calculate_trade_stats
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -153,6 +157,15 @@ print(f"Annual Return: {metrics['annual_return']:.2%}")
 print(f"Volatility: {metrics['volatility']:.2%}")
 print(f"Sharpe Ratio: {metrics['sharpe']:.2f}")
 print(f"Max Drawdown: {metrics['max_drawdown']:.2%}")
+# === 交易统计 ===
+trades_df = pd.DataFrame(trade_records)
+trade_stats = calculate_trade_stats(round_trips_df)
+
+print("\n=== 交易统计 ===")
+print(f"Win Rate: {trade_stats['win_rate']:.2%}")
+print(f"Average Win: {trade_stats['avg_win']:.2%}")
+print(f"Average Loss: {trade_stats['avg_loss']:.2%}")
+print(f"Profit/Loss Ratio: {trade_stats['profit_loss_ratio']:.2f}")
 # === 10. 保存文件 ===
 df.to_csv("data/processed/backtest_v3_result.csv", index=False)
 trades_df.to_csv("data/processed/trades_v3.csv", index=False)
