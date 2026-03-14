@@ -1,0 +1,14 @@
+Strategy: rl_q_learning_v1
+Model: tabular_q_learning
+Symbol: BTCUSDT
+Evaluation Range: 2024-04-29 00:00:00 to 2026-02-28 00:00:00
+Episodes: 80
+Learned States: 275
+Total Return: -26.47%
+Annual Return: -15.42%
+Volatility: 21.27%
+Sharpe Ratio: -0.68
+Max Drawdown: -32.33%
+Win Rate: 50.55%
+Profit/Loss Ratio: 0.75
+Total Trades: 91

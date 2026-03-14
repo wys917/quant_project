@@ -1,0 +1,18 @@
+{
+  "model_name": "tabular_q_learning",
+  "episodes": 80,
+  "alpha": 0.12,
+  "gamma": 0.95,
+  "epsilon_start": 1.0,
+  "epsilon_end": 0.05,
+  "epsilon_final": 0.08744575691882718,
+  "learned_states": 275,
+  "avg_episode_reward_last_10": 336.95885723710506,
+  "train_rows": 1562,
+  "eval_rows": 671,
+  "train_start_date": "2020-01-20 00:00:00",
+  "train_end_date": "2024-04-29 00:00:00",
+  "eval_start_date": "2024-04-29 00:00:00",
+  "eval_end_date": "2026-02-28 00:00:00",
+  "live_data_interface": "engine.market_data.fetch_binance_klines"
+}

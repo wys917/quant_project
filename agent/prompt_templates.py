@@ -15,6 +15,9 @@ Metrics Summary:
 Trade Stats Summary:
 {trade_stats_summary}
 
+Decision Summary:
+{decision_summary}
+
 Strengths:
 {strengths}
 
